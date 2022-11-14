@@ -1,3 +1,10 @@
+/*
+  SYNOPSIS: exercice on Bicep and Github protection branches
+  DESCRIPTION: 
+  VERSION: 1.0.0
+  OWNER TEAM: 
+*/
+
 @description('The Azure region into which the resources should be deployed.')
 param location string = resourceGroup().location
 
@@ -41,6 +48,8 @@ module appService 'modules/appService.bicep' = {
   params: {
     location: location
     appServiceAppName: appServiceAppName
+    storageAccountName: storageAccount.name
+    processOrderQueueName: storageAccount::queueServices::processOrderQueue.name
     environmentType: environmentType
   }
 }
